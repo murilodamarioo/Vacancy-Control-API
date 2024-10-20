@@ -23,7 +23,7 @@ public class CompanyController {
   public ResponseEntity<Object> create(@Valid @RequestBody CompanyEntity companyEntity) {
     try {
       var response = this.createCompanyUseCase.execute(companyEntity);
-      return ResponseEntity.ok().body(response);
+      return ResponseEntity.status(201).body(response);
     } catch (Exception e) {
       return ResponseEntity.badRequest().body(e.getMessage());
     }
