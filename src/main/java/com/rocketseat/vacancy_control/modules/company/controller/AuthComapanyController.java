@@ -13,7 +13,7 @@ import com.rocketseat.vacancy_control.modules.company.useCases.AuthCompanyUseCas
 
 @RestController
 @RequestMapping("/company")
-public class AuthComapnyController {
+public class AuthComapanyController {
 
   @Autowired
   private AuthCompanyUseCase authCompanyUseCase;
