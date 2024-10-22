@@ -12,13 +12,13 @@ import com.rocketseat.vacancy_control.modules.company.dto.AuthCompanyDTO;
 import com.rocketseat.vacancy_control.modules.company.useCases.AuthCompanyUseCase;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/company")
 public class AuthComapnyController {
 
   @Autowired
   private AuthCompanyUseCase authCompanyUseCase;
   
-  @PostMapping("/company")
+  @PostMapping("/auth")
   public ResponseEntity<Object> create(@RequestBody AuthCompanyDTO authCompanyDTO) {
     try {
       var response = this.authCompanyUseCase.execute(authCompanyDTO);
