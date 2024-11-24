@@ -3,6 +3,7 @@ package com.rocketseat.vacancy_control.modules.company.entites;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Column;
@@ -28,10 +29,15 @@ public class JobEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
+
+  @Schema(example = "Vacancy for Design")
   private String description;
 
   @NotBlank(message = "O campo [level] é obrigatório")
+  @Schema(example = "Senior")
   private String level;
+
+  @Schema(example = "Health insurance, Renumbered vacation")
   private String benefits;
   
   @ManyToOne()

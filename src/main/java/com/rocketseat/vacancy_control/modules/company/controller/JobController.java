@@ -2,6 +2,12 @@ package com.rocketseat.vacancy_control.modules.company.controller;
 
 import java.util.UUID;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +33,11 @@ public class JobController {
   
   @PostMapping("/")
   @PreAuthorize("hasRole('COMPANY')")
+  @Tag(name = "Vacancy", description = "Vacancy information")
+  @Operation(summary = "Vacancy register")
+  @ApiResponse(responseCode = "200", content = {
+          @Content(schema = @Schema(implementation = JobEntity.class))
+  })
   public ResponseEntity<Object> create(@Valid @RequestBody CreateJobDTO createJobDTO, HttpServletRequest request) {
     var companyId = request.getAttribute("company_id");
 
