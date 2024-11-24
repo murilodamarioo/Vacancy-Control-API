@@ -1,16 +1,15 @@
 package com.rocketseat.vacancy_control.modules.candidate.controller;
 
+import java.util.List;
 import java.util.UUID;
 
+import com.rocketseat.vacancy_control.modules.candidate.useCases.ListAllJobsByFilterUseCase;
+import com.rocketseat.vacancy_control.modules.company.entites.JobEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.rocketseat.vacancy_control.modules.candidate.CandidateEntity;
 import com.rocketseat.vacancy_control.modules.candidate.useCases.CreateCandidateUseCase;
@@ -28,6 +27,9 @@ public class CandidateController {
 
   @Autowired
   private ProfileCadidateUseCase profileCadidateUseCase;
+
+  @Autowired
+  private ListAllJobsByFilterUseCase listAllJobsByFilterUseCase;
   
   @PostMapping("/")
   public ResponseEntity<Object> create(@Valid @RequestBody CandidateEntity candidateEntity) {
@@ -51,5 +53,11 @@ public class CandidateController {
     } catch (Exception e) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
+  }
+
+  @GetMapping("/job")
+  @PreAuthorize("hasRole('CANDIDATE')")
+  public List<JobEntity> findJobByFilter(@RequestParam String filter) {
+    return this.listAllJobsByFilterUseCase.execute(filter);
   }
 }
