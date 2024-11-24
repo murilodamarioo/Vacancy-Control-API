@@ -5,6 +5,12 @@ import java.util.UUID;
 
 import com.rocketseat.vacancy_control.modules.candidate.useCases.ListAllJobsByFilterUseCase;
 import com.rocketseat.vacancy_control.modules.company.entites.JobEntity;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,6 +63,13 @@ public class CandidateController {
 
   @GetMapping("/job")
   @PreAuthorize("hasRole('CANDIDATE')")
+  @Tag(name = "Candidate", description = "Candidate information")
+  @Operation(summary = "List of vacancies available to the candidate")
+  @ApiResponse(responseCode = "200", content = {
+          @Content(
+                  array = @ArraySchema(schema = @Schema(implementation = JobEntity.class))
+          )
+  })
   public List<JobEntity> findJobByFilter(@RequestParam String filter) {
     return this.listAllJobsByFilterUseCase.execute(filter);
   }
