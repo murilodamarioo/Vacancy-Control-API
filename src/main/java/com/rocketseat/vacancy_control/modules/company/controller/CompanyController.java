@@ -28,9 +28,9 @@ public class CompanyController {
   private CreateCompanyUseCase createCompanyUseCase;
 
   @PostMapping("/")
-  @Operation(summary = "Company authentication")
+  @Operation(summary = "Create a user type Company")
   @ApiResponses({
-          @ApiResponse(responseCode = "200", content = {
+          @ApiResponse(responseCode = "201", content = {
                   @Content(schema = @Schema(implementation = CompanyEntity.class))
           }),
           @ApiResponse(responseCode = "400", description = "User already exists")
@@ -38,7 +38,7 @@ public class CompanyController {
   public ResponseEntity<Object> create(@Valid @RequestBody CompanyEntity companyEntity) {
     try {
       var response = this.createCompanyUseCase.execute(companyEntity);
-      return ResponseEntity.status(HttpStatus.OK).body(response);
+      return ResponseEntity.status(HttpStatus.CREATED).body(response);
     } catch (Exception e) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }

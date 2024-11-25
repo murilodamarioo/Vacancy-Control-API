@@ -20,7 +20,7 @@ import com.rocketseat.vacancy_control.modules.company.useCases.AuthCompanyUseCas
 @RestController
 @RequestMapping("/company")
 @Tag(name = "Company", description = "Company information")
-public class AuthComapanyController {
+public class AuthCompanyController {
 
   @Autowired
   private AuthCompanyUseCase authCompanyUseCase;
