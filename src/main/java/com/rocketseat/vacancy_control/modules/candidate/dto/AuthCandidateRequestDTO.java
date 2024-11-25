@@ -1,5 +1,11 @@
 package com.rocketseat.vacancy_control.modules.candidate.dto;
 
-public record AuthCandidateRequestDTO(String username, String password) {
+import io.swagger.v3.oas.annotations.media.Schema;
 
-}
+public record AuthCandidateRequestDTO(
+        @Schema(example = "daniel_soz")
+        String username,
+
+        @Schema(example = "admin@1234")
+        String password
+) { }
