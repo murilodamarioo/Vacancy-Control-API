@@ -52,7 +52,7 @@ public class CandidateController {
   public ResponseEntity<Object> create(@Valid @RequestBody CandidateEntity candidateEntity) {
     try {
         var response = this.createCandidateUseCase.execute(candidateEntity);
-        return ResponseEntity.status(201).body(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     } catch(Exception e) {
       return ResponseEntity.badRequest().body(e.getMessage());
     }
