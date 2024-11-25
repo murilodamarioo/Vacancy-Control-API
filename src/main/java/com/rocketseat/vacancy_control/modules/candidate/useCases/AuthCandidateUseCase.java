@@ -3,6 +3,7 @@ package com.rocketseat.vacancy_control.modules.candidate.useCases;
 import java.time.Instant;
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.security.sasl.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,14 +32,12 @@ public class AuthCandidateUseCase {
 
   public AuthCandidateResponseDTO execute(AuthCandidateRequestDTO authCandidateRequestDTO) throws AuthenticationException {
     var candidate = candidateRepository.findByUsername(authCandidateRequestDTO.username())
-    .orElseThrow(() -> {
-      throw new UsernameNotFoundException("Username/password incorrect");
-    });
+    .orElseThrow(() -> new UsernameNotFoundException("Username/password incorrect"));
 
     var passwordMatches = this.passwordEncoder.matches(authCandidateRequestDTO.password(), candidate.getPassword());
 
     if (!passwordMatches) {
-      throw new AuthenticationException();
+      throw new AuthenticationException("Username/password incorrect");
     }
 
     Algorithm algorithm = Algorithm.HMAC256(secretKey);
@@ -47,11 +46,10 @@ public class AuthCandidateUseCase {
     var token = JWT.create()
     .withIssuer("javagas")
     .withSubject(candidate.getId().toString())
-    .withClaim("role", Arrays.asList("CANDIDATE"))
+    .withClaim("role", List.of("CANDIDATE"))
     .withExpiresAt(expiresIn)
     .sign(algorithm);
 
-    var authCandidateResponse = AuthCandidateResponseDTO.builder().access_token(token).expires_in(expiresIn.toEpochMilli()).build();
-    return authCandidateResponse;
+      return AuthCandidateResponseDTO.builder().access_token(token).expires_in(expiresIn.toEpochMilli()).build();
   }
 }
