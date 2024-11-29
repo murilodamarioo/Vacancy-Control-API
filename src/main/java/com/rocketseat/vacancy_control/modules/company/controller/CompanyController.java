@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rocketseat.vacancy_control.modules.company.entites.CompanyEntity;
+import com.rocketseat.vacancy_control.modules.company.entity.CompanyEntity;
 import com.rocketseat.vacancy_control.modules.company.useCases.CreateCompanyUseCase;
 
 import jakarta.validation.Valid;

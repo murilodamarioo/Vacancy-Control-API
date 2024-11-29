@@ -5,8 +5,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.rocketseat.vacancy_control.exceptions.UserFoundException;
-import com.rocketseat.vacancy_control.modules.candidate.CandidateEntity;
-import com.rocketseat.vacancy_control.modules.candidate.CandidateRepository;
+import com.rocketseat.vacancy_control.modules.candidate.entity.CandidateEntity;
+import com.rocketseat.vacancy_control.modules.candidate.repository.CandidateRepository;
 
 @Service
 public class CreateCandidateUseCase {

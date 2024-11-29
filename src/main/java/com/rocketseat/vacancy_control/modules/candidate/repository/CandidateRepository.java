@@ -1,5 +1,6 @@
-package com.rocketseat.vacancy_control.modules.candidate;
+package com.rocketseat.vacancy_control.modules.candidate.repository;
 
+import com.rocketseat.vacancy_control.modules.candidate.entity.CandidateEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

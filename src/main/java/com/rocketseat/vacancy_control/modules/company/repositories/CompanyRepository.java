@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.rocketseat.vacancy_control.modules.company.entites.CompanyEntity;
+import com.rocketseat.vacancy_control.modules.company.entity.CompanyEntity;
 
 
 public interface CompanyRepository extends JpaRepository<CompanyEntity, UUID> {

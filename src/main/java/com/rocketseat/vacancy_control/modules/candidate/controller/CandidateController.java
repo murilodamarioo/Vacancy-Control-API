@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import com.rocketseat.vacancy_control.modules.candidate.dto.ProfileCandidateResponseDTO;
 import com.rocketseat.vacancy_control.modules.candidate.useCases.ListAllJobsByFilterUseCase;
-import com.rocketseat.vacancy_control.modules.company.entites.JobEntity;
+import com.rocketseat.vacancy_control.modules.company.entity.JobEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -20,7 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import com.rocketseat.vacancy_control.modules.candidate.CandidateEntity;
+import com.rocketseat.vacancy_control.modules.candidate.entity.CandidateEntity;
 import com.rocketseat.vacancy_control.modules.candidate.useCases.CreateCandidateUseCase;
 import com.rocketseat.vacancy_control.modules.candidate.useCases.ProfileCadidateUseCase;
 

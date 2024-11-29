@@ -1,4 +1,4 @@
-package com.rocketseat.vacancy_control.modules.candidate;
+package com.rocketseat.vacancy_control.modules.candidate.entity;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

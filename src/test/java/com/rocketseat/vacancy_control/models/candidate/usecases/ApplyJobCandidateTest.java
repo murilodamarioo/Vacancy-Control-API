@@ -6,8 +6,8 @@ import static org.mockito.ArgumentMatchers.any;
 
 import com.rocketseat.vacancy_control.exceptions.JobNotFoundException;
 import com.rocketseat.vacancy_control.exceptions.UserNotFoundException;
-import com.rocketseat.vacancy_control.modules.candidate.CandidateEntity;
-import com.rocketseat.vacancy_control.modules.candidate.CandidateRepository;
+import com.rocketseat.vacancy_control.modules.candidate.entity.CandidateEntity;
+import com.rocketseat.vacancy_control.modules.candidate.repository.CandidateRepository;
 import com.rocketseat.vacancy_control.modules.candidate.useCases.ApplyJobCandidateUseCase;
 import com.rocketseat.vacancy_control.modules.company.repositories.JobRepository;
 import org.junit.jupiter.api.DisplayName;

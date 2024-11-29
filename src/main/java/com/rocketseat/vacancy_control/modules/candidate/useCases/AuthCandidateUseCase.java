@@ -2,7 +2,6 @@ package com.rocketseat.vacancy_control.modules.candidate.useCases;
 
 import java.time.Instant;
 import java.time.Duration;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.security.sasl.AuthenticationException;
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.rocketseat.vacancy_control.modules.candidate.CandidateRepository;
+import com.rocketseat.vacancy_control.modules.candidate.repository.CandidateRepository;
 import com.rocketseat.vacancy_control.modules.candidate.dto.AuthCandidateRequestDTO;
 import com.rocketseat.vacancy_control.modules.candidate.dto.AuthCandidateResponseDTO;
 

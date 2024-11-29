@@ -3,7 +3,6 @@ package com.rocketseat.vacancy_control.modules.company.controller;
 import java.util.UUID;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -18,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rocketseat.vacancy_control.modules.company.dto.CreateJobDTO;
-import com.rocketseat.vacancy_control.modules.company.entites.JobEntity;
+import com.rocketseat.vacancy_control.modules.company.entity.JobEntity;
 import com.rocketseat.vacancy_control.modules.company.useCases.CreateJobUseCase;
 
 import jakarta.servlet.http.HttpServletRequest;

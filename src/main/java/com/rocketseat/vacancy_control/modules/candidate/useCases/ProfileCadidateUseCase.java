@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.rocketseat.vacancy_control.modules.candidate.CandidateRepository;
+import com.rocketseat.vacancy_control.modules.candidate.repository.CandidateRepository;
 import com.rocketseat.vacancy_control.modules.candidate.dto.ProfileCandidateResponseDTO;
 
 @Service

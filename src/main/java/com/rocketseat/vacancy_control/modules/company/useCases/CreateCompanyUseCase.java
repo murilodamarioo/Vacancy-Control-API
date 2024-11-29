@@ -5,7 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.rocketseat.vacancy_control.exceptions.UserFoundException;
-import com.rocketseat.vacancy_control.modules.company.entites.CompanyEntity;
+import com.rocketseat.vacancy_control.modules.company.entity.CompanyEntity;
 import com.rocketseat.vacancy_control.modules.company.repositories.CompanyRepository;
 
 @Service
