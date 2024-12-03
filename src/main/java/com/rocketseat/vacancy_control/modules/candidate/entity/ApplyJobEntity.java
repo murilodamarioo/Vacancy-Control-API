@@ -3,6 +3,7 @@ package com.rocketseat.vacancy_control.modules.candidate.entity;
 import com.rocketseat.vacancy_control.modules.company.entity.JobEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -12,6 +13,7 @@ import java.util.UUID;
 
 @Entity(name = "apply_jobs")
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class ApplyJobEntity {
