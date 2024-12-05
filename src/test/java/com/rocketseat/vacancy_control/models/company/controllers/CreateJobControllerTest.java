@@ -1,6 +1,5 @@
 package com.rocketseat.vacancy_control.models.company.controllers;
 
-import com.rocketseat.vacancy_control.exceptions.CompanyNotFoundException;
 import com.rocketseat.vacancy_control.modules.company.dto.CreateJobDTO;
 import com.rocketseat.vacancy_control.modules.company.entity.CompanyEntity;
 import com.rocketseat.vacancy_control.modules.company.repositories.CompanyRepository;
@@ -21,7 +20,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.junit.Assert.assertTrue;
 
 import java.util.UUID;
 
