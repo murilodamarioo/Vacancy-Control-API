@@ -40,15 +40,21 @@ public class JobController {
   public ResponseEntity<Object> create(@Valid @RequestBody CreateJobDTO createJobDTO, HttpServletRequest request) {
     var companyId = request.getAttribute("company_id");
 
-    var jobEntity = JobEntity.builder()
-    .benefits(createJobDTO.getBenefits())
-    .companyId(UUID.fromString(companyId.toString()))
-    .description(createJobDTO.getDescription())
-    .level(createJobDTO.getLevel())
-    .build();
-    
-    var response = this.createJobUseCase.execute(jobEntity);
-    
-    return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    try {
+      var jobEntity = JobEntity.builder()
+          .benefits(createJobDTO.getBenefits())
+          .companyId(UUID.fromString(companyId.toString()))
+          .description(createJobDTO.getDescription())
+          .level(createJobDTO.getLevel())
+          .build();
+      
+      var response = this.createJobUseCase.execute(jobEntity);
+      
+      return ResponseEntity.status(HttpStatus.CREATED).body(response);
+
+    } catch (Exception e) {
+      
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
   }
 }

@@ -1,5 +1,6 @@
 package com.rocketseat.vacancy_control.models.company.controllers;
 
+import com.rocketseat.vacancy_control.exceptions.CompanyNotFoundException;
 import com.rocketseat.vacancy_control.modules.company.dto.CreateJobDTO;
 import com.rocketseat.vacancy_control.modules.company.entity.CompanyEntity;
 import com.rocketseat.vacancy_control.modules.company.repositories.CompanyRepository;
@@ -19,6 +20,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
+import static org.junit.Assert.assertTrue;
 
 import java.util.UUID;
 
@@ -69,6 +72,22 @@ public class CreateJobControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isCreated());
 
         System.out.println(result);
+    }
+
+    @Test
+    @DisplayName("Should not be able to create a new job if company not found")
+    public void should_not_be_able_to_create_a_new_job_if_company_not_found() throws Exception {
+        var createJobDTO = CreateJobDTO.builder()
+                .benefits("BENEFITS_TEST")
+                .level("LEVEL_TEST")
+                .description("DESCRIPTION_TEST")
+                .build();
+
+        mvc.perform(MockMvcRequestBuilders.post("/company/job/")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(TestUtils.objectToJson(createJobDTO))
+                .header("Authorization", TestUtils.generateToken(UUID.fromString(UUID.randomUUID().toString()), "JAVAGAS_@123#")))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 
 
