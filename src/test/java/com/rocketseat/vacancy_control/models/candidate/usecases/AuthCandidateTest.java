@@ -13,9 +13,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.context.ActiveProfiles;
 
 import javax.security.sasl.AuthenticationException;
 import com.rocketseat.vacancy_control.modules.candidate.dto.AuthCandidateRequestDTO;
@@ -24,6 +25,8 @@ import com.rocketseat.vacancy_control.modules.candidate.repository.CandidateRepo
 import com.rocketseat.vacancy_control.modules.candidate.useCases.AuthCandidateUseCase;
 
 @RunWith(MockitoJUnitRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("test")
 public class AuthCandidateTest {
 
     @InjectMocks
@@ -36,33 +39,35 @@ public class AuthCandidateTest {
     private PasswordEncoder passwordEncoder;
 
     @Before
-    public void setUp() {
+    public void setup() {
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
     @DisplayName("Should not be able to auth candidate with wrong username")
     public void should_not_be_able_to_auth_candidate_with_wrong_username() {
-      when(candidateRepository.findByUsername("wrong_username")).thenReturn(Optional.empty());
+        // Build request
+        AuthCandidateRequestDTO authRequest = new AuthCandidateRequestDTO("wrong_username", "wrong_password");
 
-      AuthCandidateRequestDTO authRequest = new AuthCandidateRequestDTO("wrong_username", "wrong_password");
-
-      assertThatThrownBy(() -> authCandidateUseCase.execute(authRequest))
-          .isInstanceOf(UsernameNotFoundException.class)
-          .hasMessage("Username/password incorrect");
+        assertThatThrownBy(() -> authCandidateUseCase.execute(authRequest))
+            .isInstanceOf(UsernameNotFoundException.class)
+            .hasMessage("Username/password incorrect");
     }
 
     @Test 
     @DisplayName("Should not be able to auth candidate with wrong password")
     public void should_not_be_able_to_auth_candidate_with_wrong_password() {
-      when(candidateRepository.findByUsername("admin")).thenReturn(Optional.of(new CandidateEntity()));
+        // Check if candidate exists
+        when(candidateRepository.findByUsername("admin")).thenReturn(Optional.of(new CandidateEntity()));
 
-      AuthCandidateRequestDTO authRequest = new AuthCandidateRequestDTO("admin", "wrong_password");
+        // Build request
+        AuthCandidateRequestDTO authRequest = new AuthCandidateRequestDTO("admin", "wrong_password");
 
-      when(this.passwordEncoder.matches(authRequest.password(), "password")).thenReturn(false);
+        // Check if password is correct
+        when(this.passwordEncoder.matches(authRequest.password(), "password")).thenReturn(false);
 
-      assertThatThrownBy(() -> authCandidateUseCase.execute(authRequest))
-          .isInstanceOf(AuthenticationException.class)
-          .hasMessage("Username/password incorrect");
+        assertThatThrownBy(() -> authCandidateUseCase.execute(authRequest))
+            .isInstanceOf(AuthenticationException.class)
+            .hasMessage("Username/password incorrect");
     }
 }
