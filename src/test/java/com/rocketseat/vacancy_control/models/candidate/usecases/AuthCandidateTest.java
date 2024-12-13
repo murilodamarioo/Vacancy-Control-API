@@ -1,9 +1,11 @@
 package com.rocketseat.vacancy_control.models.candidate.usecases;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,6 +22,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 import javax.security.sasl.AuthenticationException;
 import com.rocketseat.vacancy_control.modules.candidate.dto.AuthCandidateRequestDTO;
+import com.rocketseat.vacancy_control.modules.candidate.dto.AuthCandidateResponseDTO;
 import com.rocketseat.vacancy_control.modules.candidate.entity.CandidateEntity;
 import com.rocketseat.vacancy_control.modules.candidate.repository.CandidateRepository;
 import com.rocketseat.vacancy_control.modules.candidate.useCases.AuthCandidateUseCase;
@@ -57,12 +60,11 @@ public class AuthCandidateTest {
     @Test 
     @DisplayName("Should not be able to auth candidate with wrong password")
     public void should_not_be_able_to_auth_candidate_with_wrong_password() {
-        // Check if candidate exists
-        when(candidateRepository.findByUsername("admin")).thenReturn(Optional.of(new CandidateEntity()));
-
         // Build request
         AuthCandidateRequestDTO authRequest = new AuthCandidateRequestDTO("admin", "wrong_password");
 
+        // Check if candidate exists
+        when(candidateRepository.findByUsername("admin")).thenReturn(Optional.of(new CandidateEntity()));
         // Check if password is correct
         when(this.passwordEncoder.matches(authRequest.password(), "password")).thenReturn(false);
 
