@@ -1,11 +1,10 @@
 package com.rocketseat.vacancy_control.models.candidate.usecases;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
-import java.util.UUID;
+
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +21,6 @@ import org.springframework.test.context.ActiveProfiles;
 
 import javax.security.sasl.AuthenticationException;
 import com.rocketseat.vacancy_control.modules.candidate.dto.AuthCandidateRequestDTO;
-import com.rocketseat.vacancy_control.modules.candidate.dto.AuthCandidateResponseDTO;
 import com.rocketseat.vacancy_control.modules.candidate.entity.CandidateEntity;
 import com.rocketseat.vacancy_control.modules.candidate.repository.CandidateRepository;
 import com.rocketseat.vacancy_control.modules.candidate.useCases.AuthCandidateUseCase;
