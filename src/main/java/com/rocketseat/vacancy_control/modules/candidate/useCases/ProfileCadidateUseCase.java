@@ -17,18 +17,14 @@ public class ProfileCadidateUseCase {
 
   public ProfileCandidateResponseDTO execute(UUID candidateId) {
     var candidate = this.candidateRepository.findById(candidateId)
-    .orElseThrow(() -> {
-      throw new UsernameNotFoundException("User not found");
-    });
+    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-    var candidateDTO = ProfileCandidateResponseDTO.builder()
-    .description(candidate.getDescription())
-    .username(candidate.getUsername())
-    .email(candidate.getEmail())
-    .name(candidate.getName())
-    .id(candidate.getId())
-    .build();
-
-    return candidateDTO;
+      return ProfileCandidateResponseDTO.builder()
+      .description(candidate.getDescription())
+      .username(candidate.getUsername())
+      .email(candidate.getEmail())
+      .name(candidate.getName())
+      .id(candidate.getId())
+      .build();
   }
 }
