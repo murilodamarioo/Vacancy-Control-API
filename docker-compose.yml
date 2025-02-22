@@ -1,4 +1,9 @@
-version: '3.8'
+networks:
+  vc-network:
+    driver: bridge
+
+volumes:
+  prometheus_data:
 
 services:
   postgres:
@@ -10,3 +15,13 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=admin
       - POSTGRES_DB=rocket
+  prometheus:
+    container_name: "prometheus"
+    image: prom/prometheus:latest
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    networks:
+      - vc-network
+    ports:
+      - 9090:9090
