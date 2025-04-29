@@ -23,3 +23,13 @@ jobs:
         run: docker build -t murilodock/vacancy_control .
       - name: Publish image
         run: docker push murilodock/vacancy_control
+  deploy:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - name: Pull image docker hub
+        run: docker pull murilodock/vacancy_control:latest
+      - name: Remove container
+        run: docker rm -f vacancy-control
+      - name: Run docker container
+        run: docker run -d -p 8080:8080 -e DATABASE_URL=${{secrets.DATABASE_URL}} -e DATABASE_PASSWORD=${{secrets.DATABASE_PASSWORD}} -e DATABASE_USERNAME=${{DATABASE_USERNAME}} --name vacancy-control murilodock/vacancy_control
